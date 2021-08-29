@@ -44,22 +44,23 @@ class Questions extends React.Component {
     render()
     {
       return (
-        <Container class="fluid p-10 my-3 border">
-          {/* <Row>
-            <h2> Sistem Evaluasi Kemampuan Mandiri </h2>
-          </Row>
-          <Row>
-            <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Masukan paragraf :</Form.Label>
-                <Form.Control as="textarea" rows={3} onChange={this.updateInput}/>
-              </Form.Group>
-              <Button variant="dark" onClick={this.generateQuestion}>
-                Bangkitkan pertanyaan !
-              </Button>
-            </Form>
-          </Row> */}
-      </Container>
+        <h1>Welcome to questions!</h1>
+      //   <Container class="fluid p-10 my-3 border">
+      //     <Row>
+      //       <h2> Sistem Evaluasi Kemampuan Mandiri </h2>
+      //     </Row>
+      //     <Row>
+      //       <Form>
+      //         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+      //           <Form.Label>Masukan paragraf :</Form.Label>
+      //           <Form.Control as="textarea" rows={3} onChange={this.updateInput}/>
+      //         </Form.Group>
+      //         <Button variant="dark" onClick={this.generateQuestion}>
+      //           Bangkitkan pertanyaan !
+      //         </Button>
+      //       </Form>
+      //     </Row>
+      // </Container>
       )
     }
   }
