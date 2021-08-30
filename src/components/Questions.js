@@ -1,66 +1,119 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Row, Button, Container } from 'react-bootstrap';
-import '../style/home.css'
+import CustomNavbar from "./CustomNavbar";
+import './style.css'
+
+const baseUrlAnswerGrading = "http://localhost:5000/get-score";
 
 class Questions extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {paragraph: ''};
-      this.generateQuestion = this.generateQuestion.bind(this);
+      this.state = {
+        paragraph: this.props.location.state.paragraph,
+        qas: this.props.location.state.qas,
+        ratio: this.props.location.state.ratio,
+        caseSensitive: this.props.location.state.caseSensitive
+      };
+      this.generateQuestion = this.gradeAnswer.bind(this);
       this.updateInput = this.updateInput.bind(this);
+      this.getStringAnswer = this.getStringAnswer.bind(this);
     }
 
-  //   componentDidMount(){
-  //     var authRole = JSON.parse(localStorage.getItem('currentUser'));
-  //     if (authRole){
-  //     axios.get(`${APIURL}/client/profil/${this.state.currentUser.id}`)
-  //       .then(res => {
-  //         this.setState({
-  //             placeholderNoTelepon: res.data.no_telepon,
-  //             placeholderDomisili: res.data.domisili,
-  //         });
-  //       })
-  //       .catch((errors) => {
-  //         console.log(errors);
-  //     })
-  //   }
-  // }
+    componentDidMount(){
+      let temp_qas = []
+      this.state.qas.map((item,index) => {
+        let qas = {
+          answer: item.answer,
+          question: item.question,
+          userAnswer: '',
+          score: null,
+          result: ''
+        }
+        temp_qas = temp_qas.concat(qas)
+      });
+      this.setState({qas: temp_qas})
+      console.log(temp_qas)
+    }
+
+    getStringAnswer(answers) {
+      let temp_answer = ''
+      answers.map((item, index) => {
+        temp_answer += item + ' '
+      })
+      temp_answer = temp_answer.substring(0,temp_answer.length-1)
+      console.log(temp_answer)
+      return temp_answer
+    }
     
-    generateQuestion(evt) {
-      alert('Plis')
-      if(this.state.paragraph === '') {
-        alert('Masukan paragraf terlebih dahulu !')
+    gradeAnswer(e, index) {
+      if(this.state.qas[index].userAnswer === '') {
+        alert('Masukan jawaban terlebih dahulu !')
       } else {
-        alert('Plis')
+        console.log(typeof this.state.ratio)
+        axios.post(baseUrlAnswerGrading, {
+          input: this.state.qas[index].userAnswer,
+          ground_truth: this.getStringAnswer(this.state.qas[index].answer),
+          case_sensitive: this.state.caseSensitive,
+          threshold: this.state.ratio
+        }).then((response) => {
+          let new_qas = this.state.qas
+          new_qas[index].score = response.data.score
+          new_qas[index].result = response.data.result
+          this.setState({qas: new_qas});
+          console.log(response.data)
+        }).catch((errors) => {
+          console.log(errors);
+        });
+
       }
     }
 
-    updateInput(evt) {
-      this.setState({paragraph: evt.target.value});
+    updateInput(e, index) {
+      let new_qas = this.state.qas
+      new_qas[index].userAnswer = e.target.value
+      this.setState({qas: new_qas});
     }
     
     render()
     {
       return (
-        <h1>Welcome to questions!</h1>
-      //   <Container class="fluid p-10 my-3 border">
-      //     <Row>
-      //       <h2> Sistem Evaluasi Kemampuan Mandiri </h2>
-      //     </Row>
-      //     <Row>
-      //       <Form>
-      //         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-      //           <Form.Label>Masukan paragraf :</Form.Label>
-      //           <Form.Control as="textarea" rows={3} onChange={this.updateInput}/>
-      //         </Form.Group>
-      //         <Button variant="dark" onClick={this.generateQuestion}>
-      //           Bangkitkan pertanyaan !
-      //         </Button>
-      //       </Form>
-      //     </Row>
-      // </Container>
+        <div>
+          <CustomNavbar/>
+          <Container className="fluid p-30 my-3">
+            <Row>
+              <h3 className='top-padding'> Sistem Evaluasi Kemampuan Mandiri </h3>
+            </Row>
+            {this.state.qas.map((qas, index) =>
+              <Row>
+                <Form>
+                  <Form.Group className="mb-4">
+                    <Form.Label>{index + 1 + '. ' + qas.question}</Form.Label>
+                    {qas.score == null ?
+                      <Form.Control key={index} className="w-50" type="text" placeholder="Masukan jawaban.." 
+                      onChange={e => this.updateInput(e, index)}/>
+                    :
+                      <Form.Control key={index} className={qas.result === 'correct' ? "correct-answer w-50" : "wrong-answer w-50" } type="text" placeholder="Masukan jawaban.." disabled />
+                    }
+                    <div className="top-padding">
+                    {qas.score != null ? 
+                      <div>
+                      <div> Penilaian : {qas.score}</div>
+                      <div> Kunci Jawaban : {this.getStringAnswer(qas.answer)}</div>
+                      </div>
+                    :
+                      <Button variant="dark" key={index} onClick={e => this.gradeAnswer(e, index)}>
+                        Periksa Jawaban !
+                      </Button>
+                    }
+                    </div>
+                  </Form.Group>
+                </Form>
+              </Row>
+            )}
+        </Container>
+      </div>
       )
     }
   }
