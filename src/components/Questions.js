@@ -19,6 +19,7 @@ class Questions extends React.Component {
       this.generateQuestion = this.gradeAnswer.bind(this);
       this.updateInput = this.updateInput.bind(this);
       this.getStringAnswer = this.getStringAnswer.bind(this);
+      this.viewHome = this.viewHome.bind(this);
     }
 
     componentDidMount(){
@@ -38,6 +39,7 @@ class Questions extends React.Component {
     }
 
     getStringAnswer(answers) {
+      console.log(answers)
       let temp_answer = ''
       answers.map((item, index) => {
         temp_answer += item + ' '
@@ -67,6 +69,11 @@ class Questions extends React.Component {
           console.log(errors);
         });
 
+        // let new_qas = this.state.qas
+        // new_qas[index].score = 84
+        // new_qas[index].result = "correct"
+        // this.setState({qas: new_qas});
+
       }
     }
 
@@ -74,6 +81,10 @@ class Questions extends React.Component {
       let new_qas = this.state.qas
       new_qas[index].userAnswer = e.target.value
       this.setState({qas: new_qas});
+    }
+
+    viewHome() {
+      this.props.history.push({pathname: '/'})
     }
     
     render()
@@ -111,9 +122,16 @@ class Questions extends React.Component {
                   </Form.Group>
                 </Form>
               </Row>
-            )}
-        </Container>
-      </div>
+              )}
+            <Row>
+              <div className="col-md-12 text-center">
+                <Button variant="dark" onClick={this.viewHome}>
+                  Coba paragraf lainnya !
+                </Button>
+              </div>
+            </Row>
+          </Container>
+        </div>
       )
     }
   }

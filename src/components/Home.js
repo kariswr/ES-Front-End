@@ -69,6 +69,13 @@ class Home extends React.Component {
           this.setState({isLoading: ''})
           console.log(errors);
         });
+
+        // let qas = [
+        //   {answer: ["wawawaw"], question: "woowooowoo"},
+        //   {answer: ["wawawaw2"], question: "woowooowoo2"}
+        // ]
+
+        // this.props.history.push({pathname: '/questions', state: {paragraph: this.state.paragraph, qas: qas, ratio: this.state.ratio, caseSensitive: this.state.caseSensitive}})
       }
     }
 
@@ -108,7 +115,10 @@ class Home extends React.Component {
             <Row>
               <h3 className='top-padding'> Sistem Evaluasi Kemampuan Mandiri </h3>
               <div className='bottom-padding'> 
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Sistem evaluasi kemampuan mandiri akan membantumu dalam melakukan evaluasi kemampuanmu terhadap suatu paragraf. Sistem 
+                akan membangkitkan pertanyaan secara otomatis dari paragraf masukan yang diberikan. Jawablah pertanyaan yang dibangkitkan 
+                sistem dan sistem akan memberikan penilaian serta kunci jawabannya. Kriteria peniaian dapat diatur dalam tombol 
+                "Atur penilaian jawaban". 
               </div>
             </Row>
             <Row>
@@ -134,7 +144,7 @@ class Home extends React.Component {
                 </div>
                 <Modal show={this.state.showModal} onHide={this.handleModalClose}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Pengaturan Penilaian Jawaban</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <Form.Label>Rasio kemiripan teks: {this.state.caseSensitive ? '-': this.state.ratio}</Form.Label>
