@@ -17,8 +17,35 @@ class About extends React.Component {
           <Container className="fluid p-10 my-3">
             <Row>
               <h3 className='top-padding'> Sistem Evaluasi Kemampuan Mandiri </h3>
-              <div> 
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              <div className='bottom-padding'> 
+                Sistem evaluasi kemampuan mandiri merupakan sebuah sistem yang dibangun untuk membantu proses evaluasi kemampuan 
+                atas suatu paragraf yang berdomain pengetahuan umum. Sistem melakukan evaluasi dengan 2 tahap utama, yakni pembangkitan pertanyaan berdasarkan paragraf,
+                dan penilaian jawaban yang diberikan atas pertanyaan yang dibangkitkan. Sistem hanya memberikan penilaian secara kasar 
+                dengan tujuan penilaian tersebut dapat membantu setiap pengguna memiliki gambaran akan kemampuannya. Sistem tidak 
+                ditujukan sebagai pengganti ujian, namun sebagai alat pembantu untuk latihan seperti teman belajar.
+              </div>
+              <div className='bottom-padding'> 
+                Dalam membangkitkan pertanyaan dari paragraf, sistem perlu melakukan pemilihan jawaban dari paragraf. Pemilihan 
+                jawaban diimplementasikan dengan modifikasi model BERT-Joint KPE karya Si Sun, dkk. Pembangkitan pertanyaan 
+                diimplementasikan dengan model pembangkit pertanyaan karya Ferdian Joshua Muis. Untuk penilaian jawaban, diimplementasikan
+                dengan penyamaan string. 
+              </div>
+              <div className='bottom-padding'> 
+                Repositori koding dapat dilihat pada : 
+                <ul>
+                  <li>
+                    <span>Pemilihan jawaban : </span>
+                    <a href="https://github.com/kariswr/Multilingual-BERT-KPE" rel="noreferrer">
+                      repositori pemilihan jawaban
+                    </a>
+                  </li>
+                  <li>
+                    <span>Pembangkit pertanyaan dan Penilaian jawaban : </span>
+                    <a href="https://github.com/kariswr/question-generator-api" rel="noreferrer">
+                      repositori pembangkit pertanyaan dan penilaian jawaban
+                    </a>
+                  </li>
+                </ul>
               </div>
             </Row>
         </Container>
