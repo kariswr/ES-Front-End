@@ -1,7 +1,13 @@
 # Evaluation System Front End
 
 This project is an interface for Knowledge Self-Evaluation System with Automatic Factoid Question Generator.\
-To know more bout overall system : 
+There is several pages implemented : 
+1. Home Page : Generating questions and adjust answer grading settings
+2. Question Answer Page : Shows generated questions to be answered and graded
+3. About Page : Explain a little more about the system
+4. Help Page : Quick guide to use the system
+
+To know more bout overall system : https://github.com/kariswr/Knowledge-Self-Evaluation-System.git
 
 ## How to Use
 
