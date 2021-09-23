@@ -7,7 +7,7 @@ There is several pages implemented :
 3. About Page : Explain a little more about the system
 4. Help Page : Quick guide to use the system
 
-To know more bout overall system : https://github.com/kariswr/Knowledge-Self-Evaluation-System.git
+To know more about overall system : https://github.com/kariswr/Knowledge-Self-Evaluation-System.git
 
 ## How to Use
 
